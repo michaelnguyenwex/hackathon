@@ -1,0 +1,86 @@
+{
+  "Pages": [
+    {
+      "PageNumber": 1,
+      "Width": 612.0,
+      "Height": 792.0,
+      "Unit": "pixel",
+      "Lines": [
+        {
+          "Content": "Client Name: John Doe",
+          "Polygon": [100, 50, 300, 50, 300, 70, 100, 70],
+          "Confidence": 0.95
+        },
+        {
+          "Content": "EIN: 12-3456789",
+          "Polygon": [100, 100, 250, 100, 250, 120, 100, 120],
+          "Confidence": 0.92
+        }
+      ],
+      "Words": [
+        {
+          "Content": "Client",
+          "Polygon": [100, 50, 150, 50, 150, 70, 100, 70],
+          "Confidence": 0.95
+        },
+        {
+          "Content": "Name",
+          "Polygon": [160, 50, 200, 50, 200, 70, 160, 70],
+          "Confidence": 0.94
+        }
+      ],
+      "SelectionMarks": []
+    },
+    {
+      "PageNumber": 2,
+      "Width": 612.0,
+      "Height": 792.0,
+      "Unit": "pixel",
+      "Lines": [
+        {
+          "Content": "Address: 123 Main St, Springfield, IL",
+          "Polygon": [100, 80, 350, 80, 350, 100, 100, 100],
+          "Confidence": 0.93
+        }
+      ],
+      "Words": [],
+      "SelectionMarks": []
+    }
+  ],
+  "KeyValuePairs": [
+    {
+      "Key": {
+        "Content": "Client Name",
+        "Polygon": [100, 50, 150, 50, 150, 70, 100, 70],
+        "Confidence": 0.95
+      },
+      "Value": {
+        "Content": "John Doe",
+        "Polygon": [160, 50, 300, 50, 300, 70, 160, 70],
+        "Confidence": 0.94
+      }
+    },
+    {
+      "Key": {
+        "Content": "EIN",
+        "Polygon": [100, 100, 130, 100, 130, 120, 100, 120],
+        "Confidence": 0.92
+      },
+      "Value": {
+        "Content": "12-3456789",
+        "Polygon": [140, 100, 250, 100, 250, 120, 140, 120],
+        "Confidence": 0.91
+      }
+    }
+  ],
+  "Paragraphs": [
+    {
+      "Content": "Client Information Section",
+      "Polygon": [90, 40, 310, 40, 310, 80, 90, 80],
+      "Role": "title",
+      "Confidence": 0.98
+    }
+  ],
+  "Tables": [],
+  "Styles": []
+}
