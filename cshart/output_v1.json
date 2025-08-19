@@ -1,0 +1,255 @@
+{
+    "meta": {
+      "employerCode": "100001",
+      "salesForceId": "0125789J125L",
+      "customFundsLineUpId": "N/A",
+      "employerPortalUsed": null
+    },
+    "section1CompanyInformation": {
+      "legalCompanyName": "Imp Test - LS",
+      "hasDBA": false,
+      "dbaName": "",
+      "taxIdNumber": "000000001",
+      "mailingAddress": "125 Main St S",
+      "city": "Metropolis",
+      "state": "WV",
+      "divisionNames": ["Ice", "Lightning", "Fire"],
+      "divisionalReporting": true,
+      "divisionalBanking": true,
+      "numberOfBenefitEligibleEmployees": 100,
+      "numberOfExpectedEnrollments": 10
+    },
+    "section2Contacts": {
+      "primary": {
+        "name": "Liza Swedberg",
+        "email": "transamericaimplementation@healthaccountservices.com",
+        "phone": "7018930033",
+        "employerPortalAccess": true
+      },
+      "secondary": { "name": "", "email": "", "phone": "" },
+      "financial": { "name": "", "division": "", "email": "", "phone": "", "employerPortalAccess": null },
+      "technical": { "name": "", "division": "", "email": "", "phone": "", "employerPortalAccess": null },
+      "additionalContacts": []
+    },
+    "section3PlanInformation": {
+      "createPlanDocuments": null,
+      "completeNondiscriminationTesting": null,
+      "loadingMethod": null,
+      "vendorPrimary": {
+        "contactName": "Robin Wayne",
+        "phone": "701-893-0033",
+        "email": "na@na.xyz",
+        "fileTypes": []
+      },
+      "vendorSecondary": { "contactName": "", "phone": "", "email": "", "fileTypes": [] },
+      "leaveOfAbsenceHandling": null,
+      "terminationHandling": { "endOfMonth": null, "sameForAllPlans": null, "otherNotes": null }
+    },
+    "sectionCoPaymentAmounts": {
+      "planHasNoCopays": false,
+      "medicalOfficeVisits": [10, 20],
+      "emergencyRoomVisits": [100, 200],
+      "pharmacy": [10, 20],
+      "dental": [10, 20],
+      "vision": [10, 20]
+    },
+    "sectionPayrollDeductionInformation": {
+      "roundingMethod": "standard",
+      "adjustmentApplied": "firstPeriod",
+      "schedules": [
+        {
+          "name": "Schedule 1",
+          "cycle": "Monthly",
+          "year": 2024,
+          "payDatesByMonth": {
+            "Jan": [1],
+            "Feb": [1],
+            "Mar": [1],
+            "Apr": [1],
+            "May": [1, 31],
+            "Jun": [],
+            "Jul": [],
+            "Aug": [1],
+            "Sep": [1],
+            "Oct": [2],
+            "Nov": [1],
+            "Dec": [1]
+          }
+        },
+        {
+          "name": "Schedule 2",
+          "cycle": "Semi-Monthly",
+          "year": 2024,
+          "payDatesByMonth": {
+            "Jan": [1, 15],
+            "Feb": [1, 15],
+            "Mar": [1, 15],
+            "Apr": [1, 15],
+            "May": [1, 15, 31],
+            "Jun": [1, 14],
+            "Jul": [1, 15],
+            "Aug": [1, 15],
+            "Sep": [1, 16],
+            "Oct": [2, 15],
+            "Nov": [1, 15],
+            "Dec": [1, 15]
+          }
+        }
+      ]
+    },
+    "section4HSA": {
+      "offered": null,
+      "estimatedEnrollments": 20,
+      "planYearStart": "2023-01-01",
+      "firstContributionDate": "2024-06-10"
+    },
+    "section5FSAs": {
+      "planYearStart": "2024-01-01",
+      "planYearEnd": "2024-12-31",
+      "plans": [
+        {
+          "type": "Medical FSA",
+          "expectedEnrollments": 5,
+          "employeeMax": "IRS Maximum",
+          "employeeMin": "No Minimum",
+          "employerContribution": "None"
+        },
+        {
+          "type": "Dependent Care FSA",
+          "expectedEnrollments": 5,
+          "employeeMax": "IRS Maximum",
+          "employeeMin": "No Minimum",
+          "employerContribution": "None"
+        },
+        {
+          "type": "Limited Purpose FSA / Post Deductible FSA",
+          "expectedEnrollments": 2,
+          "employeeMax": "IRS Maximum",
+          "employeeMin": "No Minimum",
+          "employerContribution": "None"
+        }
+      ],
+      "gracePeriod": null,
+      "gracePeriodAccountTypes": [],
+      "rollover": null,
+      "rolloverAccountTypes": [],
+      "rolloverMax": null,
+      "runoutPeriod": null,
+      "runoutSettings": []
+    },
+    "section6LossOfEligibilityAndFSA_Takeover": {
+      "canFileAfterIneligible": false,
+      "claimsSubmissionWindow": "90 days after last active",
+      "previousPlanYearTakeoverFSA": {
+        "hasTakeover": true,
+        "applies": ["Rollover"],
+        "plans": ["Medical FSA", "Limited Purpose FSA"],
+        "planYearStart": "2023-01-01",
+        "planYearEnd": "2023-12-31",
+        "settingsMatchThisYear": true,
+        "previousAdministrator": "Coffee Hounds"
+      }
+    },
+    "section6_7_HRA": {
+      "planYearStart": "2024-01-01",
+      "planYearEnd": "2024-12-31",
+      "eligibleExpenseList": "Other (HRA-S-CX-00-1295)",
+      "expectedEnrollments": 100,
+      "debitCardOffered": false,
+      "paysFirst": "HRA",
+      "mspReportingRequired": false,
+      "retroactiveReimbursementAllowed": false,
+      "fundingAvailability": "100% plan year start or upon eligibility",
+      "prorateOutsideStartDate": false,
+      "annualContributions": {
+        "single": 1000,
+        "singlePlusSpouse": 2000,
+        "singlePlusDependent": 2000,
+        "family": 2000
+      },
+      "individualReimbursementMax": null,
+      "rolloverAllowed": false,
+      "terminatedFundsRollover": false,
+      "spenddownAllowed": false,
+      "previousPlanYearTakeoverHRA": {
+        "hasTakeover": null,
+        "applies": ["Rollover"],
+        "planYearStart": "2023-01-01",
+        "planYearEnd": "2023-12-31",
+        "settingsMatchThisYear": null,
+        "previousAdministrator": "Coffee Hounds"
+      }
+    },
+    "section7QTA": {
+      "planYearStart": "2024-01-01",
+      "planYearEnd": "2024-12-31",
+      "plans": [
+        {
+          "type": "Parking",
+          "expectedEnrollments": 10,
+          "maxMonthlyContribution": "IRS Maximum",
+          "employeeMinMonthly": "No Minimum",
+          "employerMonthlyContribution": "None",
+          "contributionFundType": "Pre-tax"
+        },
+        {
+          "type": "Mass Transit",
+          "expectedEnrollments": 10,
+          "maxMonthlyContribution": "IRS Maximum",
+          "employeeMinMonthly": "No Minimum",
+          "employerMonthlyContribution": "None",
+          "contributionFundType": "Pre-tax"
+        }
+      ],
+      "runoutPeriod": null,
+      "lossOfEligibility": {
+        "claimsAllowedAfterIneligible": false,
+        "claimsSubmissionWindow": "90 days after last active"
+      },
+      "previousPlanYearTakeoverQTA": {
+        "hasTakeover": true,
+        "planYearStart": null,
+        "planYearEnd": null,
+        "settingsMatchThisYear": null,
+        "previousAdministrator": "Coffee Hounds"
+      }
+    },
+    "section8LSA": {
+      "planYearStart": "2024-01-01",
+      "planYearEnd": "2024-12-31",
+      "eligibleExpenseCategories": [
+        "Physical Wellness",
+        "Financial Wellness",
+        "Emotional Wellness/Other"
+      ],
+      "fundingAvailability": null,
+      "prorateOutsideStartDate": null,
+      "annualContributions": {
+        "single": 200,
+        "singlePlusSpouse": 0,
+        "singlePlusDependent": 0,
+        "family": 0
+      },
+      "individualReimbursementMax": null,
+      "canFileAfterIneligible": false,
+      "claimsSubmissionWindow": "90 days after last active",
+      "rolloverAllowed": false,
+      "terminatedFundsRollover": false,
+      "spenddownAllowed": false
+    },
+    "section9ProgramFees": {
+      "hsaOnlyMonthlyServiceFee": { "amount": 1.0, "paidBy": null },
+      "nonHsaMonthlyServiceFee": { "amount": 3.5, "paidBy": "Employer" },
+      "multiProductMonthlyServiceFee": { "amount": 4.0, "paidBy": "Employer" },
+      "hsaPaperStatementFee": { "amount": 1.5, "paidBy": null },
+      "nondiscriminationTesting": { "amount": null, "paidBy": "Employer" },
+      "planDocumentAnnualFee": { "amount": null, "paidBy": "Employer" },
+      "additionalPerParticipantPerMonthFee": { "amount": null, "paidBy": null },
+      "minimumMonthlyServiceFee": 100
+    },
+    "section10EmployerSignature": {
+      "printName": "",
+      "title": "",
+      "date": ""
+    }
+  }
