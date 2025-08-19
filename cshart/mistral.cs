@@ -1,5 +1,8 @@
 using System.Text;
 using Newtonsoft.Json;
+using OpenAI;
+using OpenAI.Chat;
+using System.ClientModel;
 
 namespace MistralOCR
 {
@@ -10,6 +13,25 @@ namespace MistralOCR
         
         static async Task Main(string[] args)
         {
+            Console.WriteLine("MistralOCR Application");
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1. Use Mistral OCR (original functionality)");
+            Console.WriteLine("2. Test OpenAI Chat API (converted from Python)");
+            Console.Write("Enter choice (1 or 2): ");
+            
+            string? choice = Console.ReadLine();
+            
+            if (choice == "2")
+            {
+                await UseOpenAIChat();
+            }
+            else
+            {
+                await Task.Run(() => UseMistroOCR()); // Fix the warning by using Task.Run for the sync method
+            }
+        }
+
+        private static async void UseMistroOCR() {
             // Get API key from environment variable
             string? apiKey = Environment.GetEnvironmentVariable("MISTRAL_API_KEY");
             if (string.IsNullOrEmpty(apiKey))
@@ -36,8 +58,6 @@ namespace MistralOCR
                 Console.WriteLine("Mistral OCR - Processing PDF file");
                 Console.WriteLine($"Local file: {pdfPath}");
                 Console.WriteLine();
-
-                //Choose option 2 and use the existing URL: "https://mistralaifilesapiprodswe.blob.core.windows.net/fine-tune/2078188b-b9c1-4259-b731-b432002c75e1/39cc273e-9dc4-4c08-b0fc-43a8c8897dc5/49fbd67166694569ae6a144135d5887e.pdf?se=2025-08-20T15%3A23%3A03Z&sp=r&sv=2025-01-05&sr=b&sig=eMqTLTHe8HtXRphIPyF0XIi1iwuSVzeLwFhZmf7gpDM%3D
                 
                 // Ask user if they want to use a saved URL or upload new file
                 Console.WriteLine("Choose option:");
@@ -212,6 +232,120 @@ namespace MistralOCR
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Processing error: {ex.Message}");
+            }
+        }
+
+        private static async Task UseOpenAIChat()
+        {
+            const string BASE_URL = "https://aips-ai-gateway.ue1.dev.ai-platform.int.wexfabric.com/";
+            
+            // Get API key from environment variable (you may need to set this)
+            string? apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                Console.WriteLine("Warning: OPENAI_API_KEY environment variable is not set.");
+                Console.WriteLine("Using empty key - this may work with some custom endpoints.");
+                apiKey = ""; // Some custom endpoints don't require API keys
+            }
+
+            // Create HttpClientHandler to disable SSL verification (for local development only)
+            var httpClientHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+
+            // Create HttpClient with the handler
+            var customHttpClient = new HttpClient(httpClientHandler);
+
+            try
+            {
+                // Read the OCR output JSON file
+                string ocrOutputPath = "ocr_output.json";
+                string pdfPath = Path.Combine("pdf", "sample.pdf");
+                
+                if (!File.Exists(ocrOutputPath))
+                {
+                    Console.WriteLine($"Error: OCR output file not found at {ocrOutputPath}");
+                    Console.WriteLine("Please run the OCR process first (option 1) to generate the OCR output.");
+                    return;
+                }
+
+                string ocrJsonContent = await File.ReadAllTextAsync(ocrOutputPath);
+                string jsonOutput = await File.ReadAllTextAsync("output_v1.json");
+                
+                // Configure OpenAI client with custom base URL
+                var options = new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri(BASE_URL)
+                };
+                
+                var openAIClient = new OpenAIClient(new ApiKeyCredential(apiKey), options);
+                var chatClient = openAIClient.GetChatClient("azure-gpt-4o");
+
+                // Create the prompt with OCR content and file references
+                string userPrompt = $@"Generate json object based on the pdf and the output file.
+
+PDF File: {pdfPath}
+
+OCR Content:
+{ocrJsonContent}
+
+Sample json output:
+{jsonOutput}
+
+Please analyze the OCR output above (which was extracted from the PDF) and generate a structured JSON object that summarizes or transforms the key information from the document.";
+
+                // Create chat messages with file content included
+                var messages = new List<ChatMessage>
+                {
+                    new SystemChatMessage("You are a helpful assistant that analyzes documents and generates structured JSON objects based on their content."),
+                    new UserChatMessage(userPrompt)
+                };
+
+                Console.WriteLine("Sending request to OpenAI API with OCR content...");
+                Console.WriteLine($"Including content from: {ocrOutputPath}");
+                Console.WriteLine($"PDF source: {pdfPath}");
+                Console.WriteLine();
+                
+                // Send chat completion request
+                var completion = await chatClient.CompleteChatAsync(messages);
+
+                // Extract the assistant's response
+                var assistantResponse = completion.Value.Content[0].Text;
+                
+                Console.WriteLine("OpenAI API Response:");
+                Console.WriteLine("=" + new string('=', 50));
+                Console.WriteLine(assistantResponse);
+                Console.WriteLine("=" + new string('=', 50));
+
+                // Optionally save the response to a file
+                string outputPath = "openai_analysis_output.json";
+                await File.WriteAllTextAsync(outputPath, assistantResponse);
+                Console.WriteLine($"\n✅ Response saved to: {outputPath}");
+                
+                // Also display usage information
+                if (completion.Value.Usage != null)
+                {
+                    Console.WriteLine($"\n📊 Token Usage:");
+                    Console.WriteLine($"   Input tokens: {completion.Value.Usage.InputTokenCount}");
+                    Console.WriteLine($"   Output tokens: {completion.Value.Usage.OutputTokenCount}");
+                    Console.WriteLine($"   Total tokens: {completion.Value.Usage.TotalTokenCount}");
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine($"Error: File not found - {ex.Message}");
+                Console.WriteLine("Make sure the OCR output file exists before running this option.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error calling OpenAI API: {ex.Message}");
+            }
+            finally
+            {
+                // Clean up resources
+                customHttpClient?.Dispose();
+                httpClientHandler?.Dispose();
             }
         }
     }
